@@ -1,0 +1,140 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 80px;
+  background-color: #ffffff;
+  padding: 20px 7px 7px 30px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 2px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+.logoHolder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 170px;
+    height: 60px;
+    cursor: pointer;
+  }
+  .gptProfileContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    margin-right: 30px;
+  }
+  .gptProfileHolder {
+    display: flex;
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .gptText {
+    color: #034aa6;
+    font-size: 21px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+  }
+  .gptProfileHolder .fa-toggle-on {
+    font-size: 30px;
+    color: #034aa6;
+  }
+  
+  .profileIconHolder {
+    width: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-right: 30px;
+    position: relative;
+  }
+  .profileIcon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+  }
+  .profileIdentity {
+    display: none;
+    width: 50px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #dee3fa;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    color: darkblue;
+    font-weight: 700;
+  }
+  
+  .profileDropdownContainer {
+    display: block;
+    position: absolute;
+    margin-top: -10px;
+    right: 22px;
+    z-index: 9999;
+    width: 120px;
+    background-color: #ffffff;
+    padding: 9px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    border-radius: 6px;
+    animation: slideIn 0.6s ease-in-out;
+  }
+  
+  .profileDropdownContainer::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: 9px;
+    border-width: 0 10px 10px 10px;
+    padding: 6px;
+    border-style: solid;
+    border-color: transparent transparent white transparent;
+    z-index: 1000;
+  }
+  
+  .profileDropdownContentHolder {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .shareHolder,
+  .loginHolder {
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+    padding: 6px;
+  }
+  .shareHolder:hover,
+  .loginHolder:hover {
+    background-color: #eef1f9;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+  }
+  .shareLogo,
+  .loginLogo {
+    width: 20px;
+    height: 20px;
+  }
+  .shareText,
+  .loginText {
+    font-size: 14px;
+    color: #000000;
+    font-weight: 500;
+  }
+  @keyframes slideIn {
+    0% {
+      transform: translateX(-20%);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  

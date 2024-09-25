@@ -1,0 +1,126 @@
+.homeSection {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+}
+.homeSectionSearchHolder {
+  display: flex;
+  gap: 6px;
+  position: relative;
+  margin: 10px auto;
+  width: 75%;
+  background-color: #ffffff;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  height: 45px;
+  border-radius: 6px;
+  padding: 5px;
+}
+.googleAndScholarIconHolder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.googleAndScholarIcon {
+  width: 34px;
+  height: 34px;
+}
+.homeSectionInput {
+  display: flex;
+  border: none;
+  width: 73%;
+  font-size: 14px;
+}
+.homeSectionInput:focus {
+  outline: none;
+  border: none;
+}
+.homeSectionInput::placeholder {
+  font-size: 12px;
+}
+.searchBtnHolder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, #00ccff, #034aa6);
+  gap: 7px;
+  margin-left: auto;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  padding: 0px 5px;
+  cursor: pointer;
+}
+
+.searchEngineOption {
+  display: block;
+  position: absolute;
+  margin-top: 33px;
+  margin-left: 10px;
+  z-index: 1000;
+  width: 190px;
+  background-color: #ffffff;
+  padding: 9px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  border-radius: 6px;
+  animation: engineSlideIn 0.6s ease-in-out;
+}
+
+.searchEngineOption::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 9px;
+  border-width: 0 10px 10px 10px;
+  border-style: solid;
+  border-color: transparent transparent white transparent;
+  z-index: 1000;
+}
+
+@keyframes engineSlideIn {
+  0% {
+    transform: translateY(30%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.searchEngineOptionContents {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.googleOptionHolder,
+.googleScholarOptionHolder {
+  display: flex;
+  gap: 10px;
+  padding: 6px;
+  cursor: pointer;
+}
+.googleOptionHolder:hover,
+.googleScholarOptionHolder:hover {
+  background-color: #eef1f9;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+}
+.googleText,
+.googleScholarText {
+  font-size: 14px;
+  color: #000000;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+.googleOptionHolderIcon,
+.googleScholarOptionHolderIcon {
+  width: 30px;
+  height: 30px;
+}

@@ -1,0 +1,73 @@
+.searchResultsContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+.searchResultsTotal {
+  display: flex;
+  font-size: 14px;
+  font-weight: 500;
+  animation: searchResultSlide 0.6s ease-in-out;
+}
+.searchResultsContentsHolder {
+  display: flex;
+  justify-content: space-between;
+  width: 97%;
+  background-color: #ffffff;
+  padding: 9px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  border-radius: 6px;
+  animation: searchResultSlide 0.6s ease-in-out;
+  margin-top: 20px;
+}
+.searchResultsContent {
+  display: flex;
+  gap: 20px;
+}
+.searchResultPic {
+  width: 60px;
+  height: 60px;
+}
+.searchResultsContentContainer {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+.searchResultContentHeader {
+  font-size: 18px;
+  font-weight: 600;
+}
+.searchResultContentDesc {
+  display: flex;
+  font-size: 12px;
+  margin-top: -10px;
+}
+.searchResultsContentDetail {
+  display: flex;
+  color: #775da6;
+  font-weight: 500;
+  cursor: pointer;
+}
+.bookmarkIconHolder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+}
+.bookmarkIcon {
+  width: 20px;
+  height: 25px;
+  cursor: pointer;
+}
+
+@keyframes searchResultSlide {
+  0% {
+    transform: translateX(-20%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
