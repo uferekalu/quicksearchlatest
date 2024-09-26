@@ -7,7 +7,7 @@
   display: flex;
   gap: 6px;
   position: relative;
-  margin: 10px auto;
+  margin: -10px auto;
   width: 75%;
   background-color: #ffffff;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -123,4 +123,15 @@
 .googleScholarOptionHolderIcon {
   width: 30px;
   height: 30px;
+}
+
+
+.searchingResults,
+.searchResultsAppearHere {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 70px auto;
+  font-size: 14px;
+  font-style: italic;
 }

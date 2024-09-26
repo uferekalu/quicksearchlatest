@@ -1,148 +1,29 @@
 import React from 'react'
 import '../searchResult/SearchResults.css'
+import { openLink } from '../../utils/utility'
 
-export default function SearchResults() {
+export default function SearchResults({ result }) {
   return (
     <div className="searchResultsContainer">
-      <span className="searchResultsTotal">200 Results</span>
+      {/* <span className="searchResultsTotal">200 Results</span> */}
       <div className="searchResultsContentsHolder">
         <div className="searchResultsContent">
-          <img src="images/pic.svg" alt="pic" className="searchResultPic" />
-          <div className="searchResultsContentContainer">
-            <h3 className="searchResultContentHeader">
-              Customer Engineer, SAP Specialist
-            </h3>
-            <p className="searchResultContentDesc">
-              You will be responsible for the Visual design for multi-device.
-              Understand basic design, User Journey, Ideation and Wireframing
-              etc…
-            </p>
-            <span className="searchResultsContentDetail">
-              See details {'>'}
-            </span>
-          </div>
-        </div>
-        <div className="bookmarkIconHolder">
           <img
-            src="images/bookmarkIcon.svg"
-            alt="bookmarkIcon"
-            className="bookmarkIcon"
+            src={
+              result.pagemap && result.pagemap.cse_thumbnail
+                ? result.pagemap.cse_thumbnail[0].src
+                : 'icons/icon48.png'
+            }
+            alt="pic"
+            className="searchResultPic"
           />
-        </div>
-      </div>
-      <div className="searchResultsContentsHolder">
-        <div className="searchResultsContent">
-          <img src="images/pic.svg" alt="pic" className="searchResultPic" />
           <div className="searchResultsContentContainer">
-            <h3 className="searchResultContentHeader">
-              Customer Engineer, SAP Specialist
-            </h3>
-            <p className="searchResultContentDesc">
-              You will be responsible for the Visual design for multi-device.
-              Understand basic design, User Journey, Ideation and Wireframing
-              etc…
-            </p>
-            <span className="searchResultsContentDetail">
-              See details {'>'}
-            </span>
-          </div>
-        </div>
-        <div className="bookmarkIconHolder">
-          <img
-            src="images/bookmarkIcon.svg"
-            alt="bookmarkIcon"
-            className="bookmarkIcon"
-          />
-        </div>
-      </div>
-      <div className="searchResultsContentsHolder">
-        <div className="searchResultsContent">
-          <img src="images/pic.svg" alt="pic" className="searchResultPic" />
-          <div className="searchResultsContentContainer">
-            <h3 className="searchResultContentHeader">
-              Customer Engineer, SAP Specialist
-            </h3>
-            <p className="searchResultContentDesc">
-              You will be responsible for the Visual design for multi-device.
-              Understand basic design, User Journey, Ideation and Wireframing
-              etc…
-            </p>
-            <span className="searchResultsContentDetail">
-              See details {'>'}
-            </span>
-          </div>
-        </div>
-        <div className="bookmarkIconHolder">
-          <img
-            src="images/bookmarkIcon.svg"
-            alt="bookmarkIcon"
-            className="bookmarkIcon"
-          />
-        </div>
-      </div>
-      <div className="searchResultsContentsHolder">
-        <div className="searchResultsContent">
-          <img src="images/pic.svg" alt="pic" className="searchResultPic" />
-          <div className="searchResultsContentContainer">
-            <h3 className="searchResultContentHeader">
-              Customer Engineer, SAP Specialist
-            </h3>
-            <p className="searchResultContentDesc">
-              You will be responsible for the Visual design for multi-device.
-              Understand basic design, User Journey, Ideation and Wireframing
-              etc…
-            </p>
-            <span className="searchResultsContentDetail">
-              See details {'>'}
-            </span>
-          </div>
-        </div>
-        <div className="bookmarkIconHolder">
-          <img
-            src="images/bookmarkIcon.svg"
-            alt="bookmarkIcon"
-            className="bookmarkIcon"
-          />
-        </div>
-      </div>
-      <div className="searchResultsContentsHolder">
-        <div className="searchResultsContent">
-          <img src="images/pic.svg" alt="pic" className="searchResultPic" />
-          <div className="searchResultsContentContainer">
-            <h3 className="searchResultContentHeader">
-              Customer Engineer, SAP Specialist
-            </h3>
-            <p className="searchResultContentDesc">
-              You will be responsible for the Visual design for multi-device.
-              Understand basic design, User Journey, Ideation and Wireframing
-              etc…
-            </p>
-            <span className="searchResultsContentDetail">
-              See details {'>'}
-            </span>
-          </div>
-        </div>
-        <div className="bookmarkIconHolder">
-          <img
-            src="images/bookmarkIcon.svg"
-            alt="bookmarkIcon"
-            className="bookmarkIcon"
-          />
-        </div>
-      </div>
-      <div className="searchResultsContentsHolder">
-        <div className="searchResultsContent">
-          <img src="images/pic.svg" alt="pic" className="searchResultPic" />
-          <div className="searchResultsContentContainer">
-            <h3 className="searchResultContentHeader">
-              Customer Engineer, SAP Specialist
-            </h3>
-            <p className="searchResultContentDesc">
-              You will be responsible for the Visual design for multi-device.
-              Understand basic design, User Journey, Ideation and Wireframing
-              etc…
-            </p>
-            <span className="searchResultsContentDetail">
+            <h3 className="searchResultContentHeader">{result.title}</h3>
+            <p className="searchResultContentDesc">{result.snippet}</p>
+            <span
+              className="searchResultsContentDetail"
+              onClick={(e) => openLink(result.link, true)}
+            >
               See details {'>'}
             </span>
           </div>

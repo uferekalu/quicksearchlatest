@@ -6,6 +6,9 @@ import Header from '../components/header/Header'
 import Footer from '../components/footer/Footer'
 import HomeSection from '../components/home/HomeSection'
 
+import { Provider } from 'react-redux'
+import store from '../state/store'
+
 const Popup = () => {
   return (
     <>
@@ -19,4 +22,8 @@ const Popup = () => {
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
-root.render(<Popup />)
+root.render(
+  <Provider store={store}>
+    <Popup />
+  </Provider>,
+)
