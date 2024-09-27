@@ -5,7 +5,7 @@ export async function google_search(query, phase) {
   const GSearch_ID = process.env.EXT_PUBLIC_GSearch_ID
   const startIndex = getPhase(phase)
   const URL = `https://www.googleapis.com/customsearch/v1?key=${GAPI_KEY}&cx=${GSearch_ID}&q=${encodeURIComponent(
-    query
+    query,
   )}&start=${startIndex}&num=10`
 
   try {
@@ -25,7 +25,7 @@ export async function google_search(query, phase) {
 export async function google_scholar(query, phase) {
   const origin = process.env.EXT_PUBLIC_QAPI_URL
   const URL = `${origin}/search-google-scholar?query=${encodeURIComponent(
-    query
+    query,
   )}&page=${phase}`
 
   try {
@@ -39,6 +39,21 @@ export async function google_scholar(query, phase) {
     return []
   } catch (err) {
     throw new Error(err)
+  }
+}
+
+export async function web_summary(url) {
+  const origin = process.env.EXT_PUBLIC_QAPI_URL
+  const URL = `${origin}/summarize?url=${encodeURIComponent(url)}`
+  try {
+    const response = await fetch(URL)
+    if (!response.ok) throw new Error(`HTTP error, status = ${response.status}`)
+    const data = await response.json()
+    if (data) return data.summary
+    return 'No result found'
+  } catch (error) {
+    console.error(error)
+    return "Please try again" 
   }
 }
 

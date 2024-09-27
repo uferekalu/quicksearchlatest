@@ -13,6 +13,23 @@ body {
   flex-direction: column;
   margin-top: 120px;
   max-height: 350px;
-  overflow-y: scroll;
+  overflow-y: scroll; 
   padding-bottom: 60px;
+}
+
+.generalBookmarkSpinner {
+  display: flex;
+  font-size: 24px;
+  animation: spin 1.5s linear infinite;
+  width: 40px;
+  height: 40px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
