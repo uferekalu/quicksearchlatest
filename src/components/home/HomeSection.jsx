@@ -8,7 +8,12 @@ import {
 import '../home/HomeSection.css'
 import SearchEngineOption from './SearchEngineOption'
 import SearchResults from '../searchResult/SearchResults'
-import { getGSearchValue, getStoredQuery } from '../../utils/utility'
+import {
+  getGSearchValue,
+  getScholarStoredQuery,
+  getStoredQuery,
+  Spinner,
+} from '../../utils/utility'
 import { google_scholar, google_search } from '../../api/google_api'
 import GoogleScholarResults from '../searchResult/GoogleScholarResults'
 
@@ -21,8 +26,6 @@ export default function HomeSection() {
   const [searching, setSearching] = useState(false)
   const [searchRes, setSearchRes] = useState([])
   const dispatch = useDispatch()
-
-  console.log('result', searchRes)
 
   const handleNextPhase = (next_phase) => {
     handleSearch(next_phase)
@@ -87,17 +90,31 @@ export default function HomeSection() {
           [phase]: { data: res, ttl },
         }
 
-        chrome.storage.local.set(
-          {
-            'g-search': JSON.stringify(g_search),
-            storedQuery: query_to_lower_case,
-          },
-          function () {
-            setSearchRes(res)
-            setSearching(false)
-            return
-          },
-        )
+        if (mainEng === 'Google') {
+          chrome.storage.local.set(
+            {
+              'g-search': JSON.stringify(g_search),
+              storedQuery: query_to_lower_case,
+            },
+            function () {
+              setSearchRes(res)
+              setSearching(false)
+              return
+            },
+          )
+        } else {
+          chrome.storage.local.set(
+            {
+              'g-search': JSON.stringify(g_search),
+              scholarStoredQuery: query_to_lower_case,
+            },
+            function () {
+              setSearchRes(res)
+              setSearching(false)
+              return
+            },
+          )
+        }
       } else {
         setSearchRes([])
       }
@@ -112,33 +129,48 @@ export default function HomeSection() {
     async function getSavedResults() {
       let gSearchValue = await getGSearchValue()
       const storedQuery = await getStoredQuery()
+      const scholarStoredQuery = await getScholarStoredQuery()
       if (gSearchValue) {
         const g_search =
           typeof gSearchValue === 'string'
             ? JSON.parse(gSearchValue)
             : gSearchValue
 
-        console.log(g_search)
-        console.log("stored query", storedQuery)
-        console.log("cashed phase", phaseCache)
-        console.log("search engine", searchEngine)
-
-        if (
-          g_search[`${searchEngine}`][storedQuery] &&
-          g_search[`${searchEngine}`][storedQuery][`${phaseCache}`]
-        ) {
-          const { data, ttl } =
+        if (searchEngine === 'Google') {
+          if (
+            g_search[`${searchEngine}`] &&
+            g_search[`${searchEngine}`][storedQuery] &&
             g_search[`${searchEngine}`][storedQuery][`${phaseCache}`]
+          ) {
+            const { data, ttl } =
+              g_search[`${searchEngine}`][storedQuery][`${phaseCache}`]
             if (Date.now() <= new Date(ttl).getTime()) {
-              console.log("the data", data)
-              console.log("less than ttl")
-            setSearchRes(data)
+              setSearchRes(data)
+            }
+          } else {
+            setSearchRes([])
+          }
+        } else {
+          if (
+            g_search[`${searchEngine}`] &&
+            g_search[`${searchEngine}`][scholarStoredQuery] &&
+            g_search[`${searchEngine}`][scholarStoredQuery][`${phaseCache}`]
+          ) {
+            const { data, ttl } =
+              g_search[`${searchEngine}`][scholarStoredQuery][`${phaseCache}`]
+            if (Date.now() <= new Date(ttl).getTime()) {
+              setSearchRes(data)
+            }
+          } else {
+            setSearchRes([])
           }
         }
+      } else {
+        setSearchRes([])
       }
     }
     getSavedResults()
-  }, [])
+  }, [searchEngine])
 
   const handleEnter = (e) => e.key == 'Enter' && handleNextPhase(1)
 
@@ -226,17 +258,21 @@ export default function HomeSection() {
               dispatch(setQueryState({ query: value }))
             }
           />
-          <button
-            className="searchBtnHolder"
-            onClick={() => handleNextPhase(1)}
-          >
-            Search
-            <img
-              src="images/searchSendIcon.svg"
-              alt="search"
-              className="searchSendIcon"
-            />
-          </button>
+          {searching ? (
+            <Spinner />
+          ) : (
+            <button
+              className="searchBtnHolder"
+              onClick={() => handleNextPhase(1)}
+            >
+              Search
+              <img
+                src="images/searchSendIcon.svg"
+                alt="search"
+                className="searchSendIcon"
+              />
+            </button>
+          )}
           {showSearchEngineOption && (
             <SearchEngineOption
               onMouseEnter={handleShowSearchEngineOption}
@@ -248,12 +284,17 @@ export default function HomeSection() {
         </div>
         {searchRes.length > 0 && !searching ? (
           <>
-            {searchRes.map((res, i) =>
-              engine === 'Google' ? (
-                <SearchResults key={i} result={res} />
-              ) : (
+            <span className="searchResultsTotal">
+              {searchRes.length} Results
+            </span>
+            {engine === 'Google' ? (
+              searchRes.map((res, i) => <SearchResults key={i} result={res} />)
+            ) : engine === 'GoogleScholar' ? (
+              searchRes.map((res, i) => (
                 <GoogleScholarResults key={i} result={res} />
-              ),
+              ))
+            ) : (
+              <div>No result</div>
             )}
           </>
         ) : (

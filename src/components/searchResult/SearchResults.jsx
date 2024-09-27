@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import '../searchResult/SearchResults.css'
-import { openLink } from '../../utils/utility'
+import { openLink, useWebSummary } from '../../utils/utility'
+import WebSummary from '../webSummary/WebSummary'
+import Backdrop from '../backdrop/Backdrop'
 
 export default function SearchResults({ result }) {
+  const {
+    showWebSummary,
+    handleShowWebSummary,
+    handleHideWebSummary,
+    webSummaryResult,
+    webSummaryLoading,
+  } = useWebSummary(result.link)
+
   return (
     <div className="searchResultsContainer">
-      {/* <span className="searchResultsTotal">200 Results</span> */}
       <div className="searchResultsContentsHolder">
         <div className="searchResultsContent">
           <img
@@ -20,11 +29,28 @@ export default function SearchResults({ result }) {
           <div className="searchResultsContentContainer">
             <h3 className="searchResultContentHeader">{result.title}</h3>
             <p className="searchResultContentDesc">{result.snippet}</p>
-            <span
-              className="searchResultsContentDetail"
-              onClick={(e) => openLink(result.link, true)}
-            >
-              See details {'>'}
+            <span className="searchResultsContentDetail">
+              <a
+                href="#"
+                className="searchResultsContentDetail"
+                onMouseEnter={handleShowWebSummary}
+                onMouseLeave={handleHideWebSummary}
+                onClick={(e) => {
+                  e.preventDefault()
+                  openLink(result.link, true)
+                }}
+              >
+                See details {'>'}
+              </a>
+              {showWebSummary && (
+                <WebSummary
+                  result={webSummaryResult}
+                  isLoading={webSummaryLoading}
+                  onMouseEnter={handleShowWebSummary}
+                  onMouseLeave={handleHideWebSummary}
+                />
+              )}
+              {showWebSummary && <Backdrop />}
             </span>
           </div>
         </div>

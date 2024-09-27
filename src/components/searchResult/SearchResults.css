@@ -1,15 +1,18 @@
-.searchResultsContainer {
+.searchResultsContainer,
+.googleScholarResultContainer {
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 .searchResultsTotal {
+  margin-top: 30px;
   display: flex;
   font-size: 14px;
   font-weight: 500;
   animation: searchResultSlide 0.6s ease-in-out;
 }
-.searchResultsContentsHolder {
+.searchResultsContentsHolder,
+.scholarSearchedResultContentsHolder {
   display: flex;
   justify-content: space-between;
   width: 97%;
@@ -20,44 +23,66 @@
   border-radius: 6px;
   animation: searchResultSlide 0.6s ease-in-out;
 }
-.searchResultsContent {
+.searchResultsContent,
+.scholarSearchResultsContent {
   display: flex;
   gap: 20px;
 }
-.searchResultPic {
+.searchResultPic,
+.scholarSearchResultPic {
   width: 60px;
   height: 60px;
 }
-.searchResultsContentContainer {
+.searchResultsContentContainer,
+.scholarSearchResultsContentContainer {
   display: flex;
   flex-direction: column;
   width: 80%;
 }
-.searchResultContentHeader {
-  font-size: 18px;
+.searchResultContentHeader,
+.scholarSearchResultContentHeader {
+  font-size: 16px;
   font-weight: 600;
 }
-.searchResultContentDesc {
+.searchResultContentDesc,
+.scholarSearchResultContentDesc {
   display: flex;
   font-size: 12px;
   margin-top: -10px;
 }
-.searchResultsContentDetail {
+.searchResultsContentDetail,
+.scholarSearchResultsContentDetail {
   display: flex;
   color: #775da6;
   font-weight: 500;
   cursor: pointer;
+  position: relative;
+  text-decoration: none;
 }
-.bookmarkIconHolder {
+.searchResultsContentDetail:hover,
+.scholarSearchResultsContentDetail:hover {
+  text-decoration: underline;
+}
+.bookmarkIconHolder,
+.scholarBookmarkIconHolder {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-right: 20px;
 }
-.bookmarkIcon {
-  width: 20px;
-  height: 25px;
+.bookmarkIcon,
+.scholarBookmarkIcon {
+  width: 25px;
+  height: 30px;
   cursor: pointer;
+}
+.scholarSearchResultAuthors {
+  margin-bottom: 6px;
+}
+.pdfCitationsRelatedPages {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 6px;
 }
 
 @keyframes searchResultSlide {
